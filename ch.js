@@ -3,8 +3,9 @@ const fs = require("fs");
 const path = require("path");
 
 class CH {
+
     constructor() {
-        this.cacheFilePath = path.join(__dirname, "tournamentData.json");
+        
     }
 
     async _callAPI(ENDPOINT) {
@@ -31,10 +32,16 @@ class CH {
         }
     }
 
+    getCacheFilePath(tournamentId) {
+        return path.join(__dirname, tournamentId + ".json");
+    }
+
     async getTournamentTeams(tournamentId) {
-        if (fs.existsSync(this.cacheFilePath)) {
+
+        let jsonFilePath = this.getCacheFilePath(tournamentId);
+        if (fs.existsSync(jsonFilePath)) {
             console.log("Returning data from cache file");
-            return JSON.parse(fs.readFileSync(this.cacheFilePath, "utf8"));
+            return JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
         }
 
         const ENDPOINT = `https://cricheroes.com/_next/data/pOQT8buE0-bv4xxFJs-OD/tournament/${tournamentId}/tmpl-village-2/teams.json?tournamentId=${tournamentId}&tournamentName=tmpl-village-2&tabName=team`;
@@ -53,7 +60,7 @@ class CH {
                 }
             }
 
-            fs.writeFileSync(this.cacheFilePath, JSON.stringify(teams, null, 2));
+            fs.writeFileSync(jsonFilePath, JSON.stringify(teams, null, 2));
             console.log("Saved API response to cache file.");
             return teams;
         } catch (error) {
