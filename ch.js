@@ -5,7 +5,10 @@ const path = require("path");
 class CH {
 
     constructor() {
-        
+        this.cacheDir = path.join(__dirname, "json");
+        if (!fs.existsSync(this.cacheDir)) {
+            fs.mkdirSync(this.cacheDir);
+        }
     }
 
     async _callAPI(ENDPOINT) {
@@ -33,7 +36,7 @@ class CH {
     }
 
     getCacheFilePath(tournamentId) {
-        return path.join(__dirname, tournamentId + ".json");
+        return path.join(this.cacheDir, tournamentId + ".json");
     }
 
     async getTournamentTeams(tournamentId) {
