@@ -2,8 +2,6 @@ const APP_DOMAIN = window.location.hostname === "localhost"
     ? "http://localhost:4000"
     : "https://cricheroes.onrender.com";
 
-console.log(APP_DOMAIN);
-
 async function fetchTournamentData() {
 
     /*const tournamentId = $("#tournamentId").val();
