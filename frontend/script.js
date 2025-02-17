@@ -1,9 +1,12 @@
 async function fetchTournamentData() {
-    const tournamentId = $("#tournamentId").val();
+
+    /*const tournamentId = $("#tournamentId").val();
     if (!tournamentId) {
         alert("Please enter a Tournament ID");
         return;
-    }
+    }*/
+
+    let tournamentId = "1324577";
 
     $("#teams").html("<p>Loading...</p>");
 
@@ -12,7 +15,11 @@ async function fetchTournamentData() {
         method: "GET",
         dataType: "json",
         success: function(result) {
+
+            console.log(result);
+
             $("#teams").empty();
+
             result.data.forEach(team => {
                 $("#teams").append(`<h3>${team.team_name}</h3>`);
                 let membersHtml = "<ul>";
