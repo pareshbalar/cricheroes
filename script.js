@@ -14,11 +14,8 @@ async function fetchTournamentData() {
 
     $("#teams").html("<p>Loading...</p>");
 
-    let API_URL = `${APP_DOMAIN}/api/tournament/${tournamentId}`;
-    console.log(API_URL)
-
     $.ajax({
-        url: API_URL, // Replace with your hosted API URL
+        url: `${APP_DOMAIN}/api/tournament/${tournamentId}`, // Replace with your hosted API URL
         method: "GET",
         dataType: "json",
         success: function(result) {
