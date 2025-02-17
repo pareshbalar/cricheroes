@@ -1,3 +1,7 @@
+const APP_DOMAIN = window.location.hostname === "localhost"
+    ? "http://localhost:4000"
+    : "https://cricheroes.onrender.com";
+
 async function fetchTournamentData() {
 
     /*const tournamentId = $("#tournamentId").val();
@@ -11,7 +15,7 @@ async function fetchTournamentData() {
     $("#teams").html("<p>Loading...</p>");
 
     $.ajax({
-        url: `https://your-api-url.com/api/tournament/${tournamentId}`, // Replace with your hosted API URL
+        url: `${APP_DOMAIN}/api/tournament/${tournamentId}`, // Replace with your hosted API URL
         method: "GET",
         dataType: "json",
         success: function(result) {
