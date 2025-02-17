@@ -13,7 +13,6 @@ app.use(cors());
 app.get('/api/tournament/:id', async (req, res) => {
     const tournamentId = req.params.id;
     const chInstance = new CH();
-
     try {
         const data = await chInstance.getTournamentData(tournamentId);
         res.json({ message: `Data for tournament ID: ${tournamentId}`, data: data });

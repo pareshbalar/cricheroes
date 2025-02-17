@@ -5,10 +5,13 @@ const path = require("path");
 class CH {
 
     constructor() {
+
         this.cacheDir = path.join(__dirname, "json");
         if (!fs.existsSync(this.cacheDir)) {
             fs.mkdirSync(this.cacheDir);
         }
+
+        this.token = "H1Msd7dU9LbgLz-TvSM1A";
     }
 
     async _callAPI(ENDPOINT) {
@@ -47,7 +50,9 @@ class CH {
             return JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
         }
 
-        const ENDPOINT = `https://cricheroes.com/_next/data/pOQT8buE0-bv4xxFJs-OD/tournament/${tournamentId}/tmpl-village-2/teams.json?tournamentId=${tournamentId}&tournamentName=tmpl-village-2&tabName=team`;
+        const ENDPOINT = `https://cricheroes.com/_next/data/${this.token}/tournament/${tournamentId}/tmpl-village-2/teams.json?tournamentId=${tournamentId}&tournamentName=tmpl-village-2&tabName=team`;
+
+        console.log(ENDPOINT);
 
         try {
             console.log(`Fetching teams for tournament ID: ${tournamentId}`);
@@ -73,7 +78,7 @@ class CH {
     }
 
     async getTeamMembers(teamId, teamName) {
-        const ENDPOINT = `https://cricheroes.com/_next/data/pOQT8buE0-bv4xxFJs-OD/team-profile/${teamId}/${teamName}/members.json?teamId=${teamId}&teamName=${teamName}&tabName=members`;
+        const ENDPOINT = `https://cricheroes.com/_next/data/${this.token}/team-profile/${teamId}/${teamName}/members.json?teamId=${teamId}&teamName=${teamName}&tabName=members`;
 
         try {
             return (await this._callAPI(ENDPOINT))?.pageProps?.members?.data?.members || [];
